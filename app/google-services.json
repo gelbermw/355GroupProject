@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "698884234819",
+    "firebase_url": "https://moms-warehouse.firebaseio.com",
+    "project_id": "moms-warehouse",
+    "storage_bucket": "moms-warehouse.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:698884234819:android:ab923f70dc1fb742",
+        "android_client_info": {
+          "package_name": "cmsc355.group.moms_warehouse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "698884234819-bbhl0eqvopftac75ar00s4b4gn8kfp2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cmsc355.group.moms_warehouse",
+            "certificate_hash": "0dba015be1c1b1e266f04bfca0c02d0b2c3bb4b9"
+          }
+        },
+        {
+          "client_id": "698884234819-gs31j2m6940rkebkn3bed3g2mov0jfh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQXQKsh7Rz-ilH9xgbSxa3FD1sM4uE0rI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "698884234819-gs31j2m6940rkebkn3bed3g2mov0jfh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
