@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
         });
 //
 //        warehouseData dummyData = new warehouseData();
-//        dummyData.itemName = "Fuck";
-//        dummyData.description = "You";
+//        dummyData.itemName = "test1";
+//        dummyData.description = "test2";
 //
 //        db.push().setValue(dummyData);
 //        dummyData.itemName = "Mehama";
