@@ -18,10 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import cmsc355.group.moms_warehouse.database.data.ItemData;
+
 public class warehouse extends AppCompatActivity {
 
 
-    List<warehouseData> list = new ArrayList<>();
+    List<ItemData> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +31,19 @@ public class warehouse extends AppCompatActivity {
         setContentView(R.layout.activity_warehouse);
 
         ListView listView = (ListView) findViewById(R.id.itemList);
-        ArrayAdapter adapter = new ArrayAdapter<warehouseData>(this, android.R.layout.simple_list_item_1, list);
+        final ArrayAdapter adapter = new ArrayAdapter<ItemData>(this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(adapter);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("warehouse");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("items");
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.d("Results", "Item Added to List!");    //may not be needed
-                warehouseData waredata = dataSnapshot.getValue(warehouseData.class);
+                ItemData warehouse = dataSnapshot.getValue(ItemData.class);
                 //if (showItem(waredata)){
-                    list.add(waredata);
-                    //adapter.notifyDataSetChanged();
+                    list.add(warehouse);
+                    adapter.notifyDataSetChanged();
                 //}
             }
 
@@ -53,10 +55,10 @@ public class warehouse extends AppCompatActivity {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Log.d("RESULTS", "Item Removed From List!");
-                //if (list.remove(dataSnapshot.getValue(warehouseData.class)))
-                //{
-                   // adapter.notifyDataSetChanged();
-                //}
+                if (list.remove(dataSnapshot.getValue(ItemData.class)))
+                {
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -72,7 +74,7 @@ public class warehouse extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                warehouseData item = (warehouseData) parent.getItemAtPosition(i);
+                ItemData item = (ItemData) parent.getItemAtPosition(i);
                 Intent intent = new Intent(warehouse.this, itemDetails.class);
 
                 intent.putExtra("name", item.name);
