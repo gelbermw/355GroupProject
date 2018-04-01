@@ -16,14 +16,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import cmsc355.group.moms_warehouse.database.data.ItemData;
+import cmsc355.group.moms_warehouse.database.data.Sorts.SortByNameAscending;
 
 public class warehouse extends AppCompatActivity {
 
 
-    List<ItemData> list = new ArrayList<>();
+    ArrayList<ItemData> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class warehouse extends AppCompatActivity {
         setContentView(R.layout.activity_warehouse);
 
         ListView listView = (ListView) findViewById(R.id.itemList);
+        Collections.sort(list, new SortByNameAscending());
         final ArrayAdapter adapter = new ArrayAdapter<ItemData>(this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(adapter);
@@ -43,6 +46,7 @@ public class warehouse extends AppCompatActivity {
                 ItemData warehouse = dataSnapshot.getValue(ItemData.class);
                 //if (showItem(waredata)){
                     list.add(warehouse);
+                    Collections.sort(list, new SortByNameAscending());
                     adapter.notifyDataSetChanged();
                 //}
             }
