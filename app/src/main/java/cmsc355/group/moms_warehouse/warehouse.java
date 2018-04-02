@@ -8,7 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,12 +28,24 @@ import cmsc355.group.moms_warehouse.database.data.Sorts.SortByNameAscending;
 public class warehouse extends AppCompatActivity {
 
 
+    FirebaseUser user;
     ArrayList<ItemData> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_warehouse);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        TextView textView = findViewById(R.id.TVusername);
+
+        if(user != null){
+            textView.setText(user.getEmail());
+        }
+        else{
+            textView.setText("Error");
+        }
 
         ListView listView = (ListView) findViewById(R.id.itemList);
         Collections.sort(list, new SortByNameAscending());
@@ -42,13 +57,13 @@ public class warehouse extends AppCompatActivity {
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.d("Results", "Item Added to List!");    //may not be needed
-                ItemData warehouse = dataSnapshot.getValue(ItemData.class);
-                //if (showItem(waredata)){
-                    list.add(warehouse);
-                    Collections.sort(list, new SortByNameAscending());
-                    adapter.notifyDataSetChanged();
-                //}
+                Log.d("Results", "Item Added to List!");
+
+                ItemData item = dataSnapshot.getValue(ItemData.class);
+
+                list.add(item);
+                Collections.sort(list, new SortByNameAscending());
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -81,11 +96,11 @@ public class warehouse extends AppCompatActivity {
                 ItemData item = (ItemData) parent.getItemAtPosition(i);
                 Intent intent = new Intent(warehouse.this, itemDetails.class);
 
-                intent.putExtra("name", item.name);
-                intent.putExtra("description", item.description);
-                intent.putExtra("location", item.location);
-                intent.putExtra("expire", item.expire);
-                intent.putExtra("quantity", item.quantity);
+                intent.putExtra("name", item.getName());
+                intent.putExtra("description", item.getDescription());
+                intent.putExtra("location", item.getLocation());
+                intent.putExtra("expire", item.getExpire());
+                intent.putExtra("quantity", item.getQuantity());
 
                 startActivity(intent);
             }

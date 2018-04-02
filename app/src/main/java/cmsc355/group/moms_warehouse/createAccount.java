@@ -17,10 +17,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import cmsc355.group.moms_warehouse.database.data.User;
+import cmsc355.group.moms_warehouse.database.tables.UserTable;
 
 public class createAccount extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,7 @@ public class createAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     public void onButtonClick(View view){
@@ -52,12 +59,16 @@ public class createAccount extends AppCompatActivity {
         }
     }
 
-    public void create_new_user(String email, String password){
+    public void create_new_user(final String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+
+                            UserTable userTable = new UserTable();
+                            userTable.addEntry(new User(email));
+
                             Log.d("Error", "createUserWithEmail:success");
                             Context context = getApplicationContext();
                             Toast.makeText(context, "Great Success!", Toast.LENGTH_LONG).show();

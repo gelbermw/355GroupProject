@@ -8,11 +8,11 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class ItemData extends DatabaseData implements Comparable<ItemData>{
 
-    public String name;
-    public String description;
-    public String location;
-    public String expire;
-    public String quantity;
+    private String name;
+    private String description;
+    private String location;
+    private String expire;
+    private String quantity;
 
     public ItemData(){
 
@@ -33,21 +33,36 @@ public class ItemData extends DatabaseData implements Comparable<ItemData>{
     public String getName() {
         return name;
     }
+    public void setName(String name){
+        this.name = name;
+    }
 
     public String getDescription() {
         return description;
+    }
+    public void setDescription(String description){
+        this.description = description;
     }
 
     public String getLocation() {
         return location;
     }
+    public void setLocation(String location){
+        this.location = location;
+    }
 
     public String getExpire() {
         return expire;
     }
+    public void setExpire(String expire){
+        this.expire = expire;
+    }
 
     public String getQuantity() {
         return quantity;
+    }
+    public void setQuantity(String quantity){
+        this.quantity = quantity;
     }
 
     public String toString(){
