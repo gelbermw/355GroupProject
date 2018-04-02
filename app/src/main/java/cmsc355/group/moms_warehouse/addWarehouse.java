@@ -26,28 +26,24 @@ public class addWarehouse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_warehouse);
 
-        Button warehouseScreen = findViewById(R.id.Badditem);
-        warehouseScreen.setOnClickListener(new View.OnClickListener(){
+    }
 
-            public void onClick(View view){
+    public void onButtonClick(View view){
+        Intent myIntent = new Intent(addWarehouse.this, warehouse.class);
+        addWarehouse.this.startActivity(myIntent);
 
-                Intent myIntent = new Intent(addWarehouse.this, warehouse.class);
-                addWarehouse.this.startActivity(myIntent);
+        TextView text = findViewById(R.id.TFItemName);
+        String itemName = text.getText().toString();
+        text = findViewById(R.id.TFdescription);
+        String itemDescription = text.getText().toString();
+        text = findViewById(R.id.TFItemLoc);
+        String itemLocation = text.getText().toString();
+        text = findViewById(R.id.TFExpDate);
+        String itemExpire = text.getText().toString();
+        text = findViewById(R.id.TFQuantity);
+        String itemQuantity = text.getText().toString();
 
-                TextView text = findViewById(R.id.TFItemName);
-                String itemName = text.getText().toString();
-                text = findViewById(R.id.TFdescription);
-                String itemDescription = text.getText().toString();
-                text = findViewById(R.id.TFItemLoc);
-                String itemLocation = text.getText().toString();
-                text = findViewById(R.id.TFExpDate);
-                String itemExpire = text.getText().toString();
-                text = findViewById(R.id.TFQuantity);
-                String itemQuantity = text.getText().toString();
-
-                ItemTable itemTable = new ItemTable();
-                itemTable.addEntry(new ItemData(itemName,itemDescription,itemLocation,itemExpire,itemQuantity));
-            }
-        });
+        ItemTable itemTable = new ItemTable();
+        itemTable.addEntry(new ItemData(itemName,itemDescription,itemLocation,itemExpire,itemQuantity));
     }
 }
