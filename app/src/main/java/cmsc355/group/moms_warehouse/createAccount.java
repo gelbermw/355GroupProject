@@ -1,5 +1,6 @@
 package cmsc355.group.moms_warehouse;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -28,19 +29,13 @@ public class createAccount extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        Button signup_button = findViewById(R.id.Bsignup);
+        Button signup_button = findViewById(R.id.Bsubmit);
         signup_button.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View view){
 
-                EditText text = findViewById(R.id.TFname);
-                String name = text.getText().toString();
-
-                text = findViewById(R.id.TFemail);
+                EditText text = findViewById(R.id.TFemail);
                 String email = text.getText().toString();
-
-                text = findViewById(R.id.TFuname);
-                String user_name = text.getText().toString();
 
                 text = findViewById(R.id.TFpass1);
                 String password_one = text.getText().toString();
@@ -48,14 +43,16 @@ public class createAccount extends AppCompatActivity {
                 text = findViewById(R.id.TFpass2);
                 String password_two = text.getText().toString();
 
-                /*if(!password_one.equals(password_two)){
-                    System.out.println("You goofed!");
-                    Intent i = new Intent(createAccount.this, LoginActivity.class);
-                    startActivity(i);
+                if(!password_one.equals(password_two)){
+                    Context context = getApplicationContext();
+                    Toast.makeText(context, "Passwords don't match", Toast.LENGTH_LONG).show();
                 }
                 else{
                     create_new_user(email, password_one);
-                }*/
+
+                    Intent i = new Intent(createAccount.this, LoginActivity.class);
+                    startActivity(i);
+                }
             }
         });
     }
@@ -67,19 +64,28 @@ public class createAccount extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Log.d("Error", "createUserWithEmail:success");
+                            Context context = getApplicationContext();
+                            Toast.makeText(context, "Great Success!", Toast.LENGTH_LONG).show();
                         }
                         else{
                             Log.w("Error", "createUserWithEmail:failure", task.getException());
-
+                            Context context = getApplicationContext();
+                            Toast.makeText(context, "Great Failure =(", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
 
-    public void onButtonClick(View v) {
-        if (v.getId() == R.id.Bsubmit) {
-            Intent i = new Intent(createAccount.this, LoginActivity.class);
-            startActivity(i);
-        }
+    public void send_verification_email(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Verification Email", "Email sent.");
+                        }
+                    }
+                });
     }
 }
