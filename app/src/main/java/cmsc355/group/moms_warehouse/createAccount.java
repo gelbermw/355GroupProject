@@ -28,33 +28,28 @@ public class createAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         mAuth = FirebaseAuth.getInstance();
+    }
 
-        Button signup_button = findViewById(R.id.Bsubmit);
-        signup_button.setOnClickListener(new View.OnClickListener(){
+    public void onButtonClick(View view){
+        EditText text = findViewById(R.id.TFemail);
+        String email = text.getText().toString();
 
-            public void onClick(View view){
+        text = findViewById(R.id.TFpass1);
+        String password_one = text.getText().toString();
 
-                EditText text = findViewById(R.id.TFemail);
-                String email = text.getText().toString();
+        text = findViewById(R.id.TFpass2);
+        String password_two = text.getText().toString();
 
-                text = findViewById(R.id.TFpass1);
-                String password_one = text.getText().toString();
+        if(!password_one.equals(password_two)){
+            Context context = getApplicationContext();
+            Toast.makeText(context, "Passwords don't match", Toast.LENGTH_LONG).show();
+        }
+        else{
+            create_new_user(email, password_one);
 
-                text = findViewById(R.id.TFpass2);
-                String password_two = text.getText().toString();
-
-                if(!password_one.equals(password_two)){
-                    Context context = getApplicationContext();
-                    Toast.makeText(context, "Passwords don't match", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    create_new_user(email, password_one);
-
-                    Intent i = new Intent(createAccount.this, LoginActivity.class);
-                    startActivity(i);
-                }
-            }
-        });
+            Intent i = new Intent(createAccount.this, LoginActivity.class);
+            startActivity(i);
+        }
     }
 
     public void create_new_user(String email, String password){
