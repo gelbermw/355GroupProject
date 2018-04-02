@@ -35,5 +35,9 @@ public class itemDetails extends AppCompatActivity {
             Intent i = new Intent(itemDetails.this, warehouse.class);
             startActivity(i);
         }
+        else if(v.getId() == R.id.BDelete){
+            Intent i = new Intent(itemDetails.this, warehouse.class);
+            startActivity(i);
+        }
     }
 }
