@@ -7,9 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,9 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import cmsc355.group.moms_warehouse.database.data.User;
-import cmsc355.group.moms_warehouse.database.tables.UserTable;
 
 public class createAccount extends AppCompatActivity {
 
@@ -34,7 +29,6 @@ public class createAccount extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
     public void onButtonClick(View view){
@@ -65,9 +59,6 @@ public class createAccount extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-
-                            UserTable userTable = new UserTable();
-                            userTable.addEntry(new User(email));
 
                             Log.d("Error", "createUserWithEmail:success");
                             Context context = getApplicationContext();

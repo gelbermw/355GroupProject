@@ -17,19 +17,19 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.internal.api.FirebaseNoSignedInUserException;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-import cmsc355.group.moms_warehouse.database.data.ItemData;
+import cmsc355.group.moms_warehouse.database.data.Item;
 import cmsc355.group.moms_warehouse.database.data.Sorts.SortByNameAscending;
 
 public class warehouse extends AppCompatActivity {
 
 
     FirebaseUser user;
-    ArrayList<ItemData> list = new ArrayList<>();
+    ArrayList<Item> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +47,19 @@ public class warehouse extends AppCompatActivity {
             textView.setText("Error");
         }
 
-        ListView listView = (ListView) findViewById(R.id.itemList);
+        ListView listView = findViewById(R.id.itemList);
         Collections.sort(list, new SortByNameAscending());
-        final ArrayAdapter adapter = new ArrayAdapter<ItemData>(this, android.R.layout.simple_list_item_1, list);
+        final ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(adapter);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("items");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users/").child(user.getUid()).child("items");
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.d("Results", "Item Added to List!");
 
-                ItemData item = dataSnapshot.getValue(ItemData.class);
+                Item item = dataSnapshot.getValue(Item.class);
 
                 list.add(item);
                 Collections.sort(list, new SortByNameAscending());
@@ -74,7 +74,7 @@ public class warehouse extends AppCompatActivity {
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Log.d("RESULTS", "Item Removed From List!");
-                if (list.remove(dataSnapshot.getValue(ItemData.class)))
+                if (list.remove(dataSnapshot.getValue(Item.class)))
                 {
                     adapter.notifyDataSetChanged();
                 }
@@ -93,7 +93,7 @@ public class warehouse extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                ItemData item = (ItemData) parent.getItemAtPosition(i);
+                Item item = (Item) parent.getItemAtPosition(i);
                 Intent intent = new Intent(warehouse.this, itemDetails.class);
 
                 intent.putExtra("name", item.getName());

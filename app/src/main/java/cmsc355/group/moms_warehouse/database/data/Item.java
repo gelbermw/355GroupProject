@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 @IgnoreExtraProperties
-public class ItemData extends DatabaseData implements Comparable<ItemData>{
+public class Item extends DatabaseData implements Comparable<Item>{
 
     private String name;
     private String description;
@@ -14,11 +14,11 @@ public class ItemData extends DatabaseData implements Comparable<ItemData>{
     private String expire;
     private String quantity;
 
-    public ItemData(){
+    public Item(){
 
     }
 
-    public ItemData(String name, String description, String location, String expire, String quantity){
+    public Item(String name, String description, String location, String expire, String quantity){
         this.name = format_cases(name);
         this.description = description;
         this.location = location;
@@ -70,7 +70,7 @@ public class ItemData extends DatabaseData implements Comparable<ItemData>{
     }
 
     @Override
-    public int compareTo(@NonNull ItemData o) {
+    public int compareTo(@NonNull Item o) {
         return (this.name.compareTo(o.name));
     }
 }
