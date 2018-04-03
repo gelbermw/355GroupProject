@@ -3,6 +3,8 @@ package cmsc355.group.moms_warehouse.database.tables;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +28,8 @@ public class DatabaseTable<T extends DatabaseData> implements ChildEventListener
         this.t = t;
         this.table = table;
         data = new HashMap<>();
-        db = FirebaseDatabase.getInstance().getReference().child(table);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db = FirebaseDatabase.getInstance().getReference().child("users/").child(user.getUid()).child(table);
         db.addChildEventListener(this);
     }
 

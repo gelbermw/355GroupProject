@@ -4,19 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import cmsc355.group.moms_warehouse.database.data.ItemData;
+import cmsc355.group.moms_warehouse.database.data.Item;
 import cmsc355.group.moms_warehouse.database.tables.ItemTable;
 
 public class addWarehouse extends AppCompatActivity {
@@ -43,7 +38,13 @@ public class addWarehouse extends AppCompatActivity {
         text = findViewById(R.id.TFQuantity);
         String itemQuantity = text.getText().toString();
 
+        Item item = new Item(itemName, itemDescription, itemLocation, itemExpire, itemQuantity);
+
         ItemTable itemTable = new ItemTable();
-        itemTable.addEntry(new ItemData(itemName,itemDescription,itemLocation,itemExpire,itemQuantity));
+        itemTable.addEntry(item);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        /*DatabaseReference database = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("items");
+        database.child(itemName).setValue(itemName);*/
     }
 }

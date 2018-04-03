@@ -2,16 +2,15 @@ package cmsc355.group.moms_warehouse.database.tables;
 
 
 import com.google.firebase.database.DatabaseReference;
+import cmsc355.group.moms_warehouse.database.data.Item;
 
-import cmsc355.group.moms_warehouse.database.data.ItemData;
-
-public class ItemTable extends DatabaseTable<ItemData>{
+public class ItemTable extends DatabaseTable<Item>{
 
     public ItemTable(){
-        super("items", ItemData.class);
+        super("items", Item.class);
     }
 
-    protected DatabaseReference newEntry(ItemData entry){
-        return db.child(entry.name);
+    protected DatabaseReference newEntry(Item entry){
+        return db.child(entry.getName());
     }
 }
