@@ -92,6 +92,12 @@ public class LoginActivityTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static Matcher<View> childAtPosition(
