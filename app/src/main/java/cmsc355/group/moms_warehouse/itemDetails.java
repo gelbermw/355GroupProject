@@ -5,9 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class itemDetails extends AppCompatActivity {
-
+    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,11 +36,15 @@ public class itemDetails extends AppCompatActivity {
     }
 
     public void onButtonClick(View v) {
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (v.getId() == R.id.Bback) {
             Intent i = new Intent(itemDetails.this, warehouse.class);
             startActivity(i);
         }
         else if(v.getId() == R.id.BDelete){
+            String text = getIntent().getStringExtra("name");
+            FirebaseDatabase.getInstance().getReference().child("users/").child(user.getUid()).child("items").child(text).setValue(null);
+            Toast.makeText(itemDetails.this, "Item Deleted", Toast.LENGTH_LONG).show();
             Intent i = new Intent(itemDetails.this, warehouse.class);
             startActivity(i);
         }

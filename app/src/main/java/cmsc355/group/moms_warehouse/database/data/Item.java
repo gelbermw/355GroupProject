@@ -69,6 +69,7 @@ public class Item extends DatabaseData implements Comparable<Item>{
         return name;
     }
 
+
     @Override
     public int compareTo(@NonNull Item o) {
         return (this.name.compareTo(o.name));

@@ -53,7 +53,7 @@ public class SignUpActivityTest {
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("njarratt6@gmail.com"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("njarratt4@gmail.com"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.TFpassword),
@@ -109,7 +109,7 @@ public class SignUpActivityTest {
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText3.perform(replaceText("njarratt6@gmail.com"), closeSoftKeyboard());
+        appCompatEditText3.perform(replaceText("njarratt4@gmail.com"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText4 = onView(
                 allOf(withId(R.id.TFpass1),
@@ -195,7 +195,7 @@ public class SignUpActivityTest {
                                         0),
                                 2),
                         isDisplayed()));
-        appCompatEditText6.perform(replaceText("njarratt6@gmail.com"), closeSoftKeyboard());
+        appCompatEditText6.perform(replaceText("njarratt4@gmail.com"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText7 = onView(
                 allOf(withId(R.id.TFpassword),

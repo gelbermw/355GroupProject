@@ -38,13 +38,13 @@ public class warehouse extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        TextView textView = findViewById(R.id.TVusername);
+        TextView textView = findViewById(R.id.TVuname);
 
         if(user != null){
-            textView.setText(user.getEmail());
+            textView.append(user.getEmail());
         }
         else{
-            textView.setText("Error");
+            textView.append("Error");
         }
 
         ListView listView = findViewById(R.id.itemList);
