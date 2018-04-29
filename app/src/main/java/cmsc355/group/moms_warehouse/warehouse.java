@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,8 +34,10 @@ public class warehouse extends AppCompatActivity {
     FirebaseUser user;
     ArrayList<Item> list = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_warehouse);
 
@@ -112,6 +117,37 @@ public class warehouse extends AppCompatActivity {
             Intent i = new Intent(warehouse.this, addWarehouse.class);
             startActivity(i);
         }
-    }
 
+        if (v.getId() == R.id.Bsearch) {
+            TextView text = findViewById(R.id.TFsearch);
+            String query = text.getText().toString();
+            //SearchView searchEntry = (SearchView) findViewById(R.id.searchItems);
+            //CharSequence query = searchEntry.getQuery();
+            //CharSequence query = "test";
+            //String itemExist = FirebaseDatabase.getInstance().getReference().child("users/").child(user.getUid()).child("items").child(query).setValue();
+            if (!query.equals("test")) {
+            //if () {
+                Toast.makeText(warehouse.this, "FAILURE!!", Toast.LENGTH_SHORT).show();
+                Log.e("queryValue", "Value: " + (String) query);
+            } else {
+                Toast.makeText(warehouse.this, "SUCCESS!!", Toast.LENGTH_SHORT).show();
+                Log.e("queryValue", "Value: " + (String) query);
+            }
+            /*searchEntry.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+            */
+            Intent i = new Intent(warehouse.this, warehouse.class);
+            startActivity(i);
+        }
+    }
 }

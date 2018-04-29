@@ -23,7 +23,8 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".createAccount" />
-        <activity android:name=".warehouse" />
+        <activity android:name=".warehouse"
+            android:launchMode="singleTop"/>
         <activity android:name=".addWarehouse" />
         <activity android:name=".itemDetails"></activity>
     </application>
