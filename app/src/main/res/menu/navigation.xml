@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity_warehouse">
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/search_here"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/navigation_home"
@@ -15,14 +25,7 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard"
         android:visible="true" />
-    <!--
-    <item
-        android:id="@+id/navigation_notifications"
-        android:enabled="true"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications"
-        android:visible="true" />
-    -->
+
     <item
         android:id="@+id/navigation_settings"
         android:enabled="true"

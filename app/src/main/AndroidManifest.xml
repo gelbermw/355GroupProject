@@ -13,7 +13,7 @@
         android:label="Mom&apos;s Warehouse"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,10 +23,17 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".createAccount" />
-        <activity android:name=".warehouse"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".warehouse"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                        android:resource="@xml/searchable"/>
+        </activity>
         <activity android:name=".addWarehouse" />
-        <activity android:name=".itemDetails"></activity>
+        <activity android:name=".itemDetails" />
     </application>
 
 </manifest>
