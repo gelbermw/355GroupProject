@@ -35,7 +35,6 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".addWarehouse" />
-        <activity android:name=".itemDetails" />
         <activity android:name=".editWarehouse"></activity>
     </application>
 
