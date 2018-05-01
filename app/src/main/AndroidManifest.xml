@@ -27,13 +27,16 @@
             android:name=".warehouse"
             android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                        android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity android:name=".addWarehouse" />
         <activity android:name=".itemDetails" />
+        <activity android:name=".editWarehouse"></activity>
     </application>
 
 </manifest>

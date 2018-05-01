@@ -101,7 +101,8 @@ public class warehouse extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                     Item item = (Item) parent.getItemAtPosition(i);
-                    Intent intent = new Intent(warehouse.this, itemDetails.class);
+                    //Intent intent = new Intent(warehouse.this, itemDetails.class);
+                    Intent intent = new Intent(warehouse.this, editWarehouse.class);
 
                     intent.putExtra("name", item.getName());
                     intent.putExtra("description", item.getDescription());

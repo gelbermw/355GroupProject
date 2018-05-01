@@ -49,4 +49,9 @@ public class itemDetails extends AppCompatActivity {
             startActivity(i);
         }
     }
+
+    public void onEditClick(View v) {
+        Intent i = new Intent(itemDetails.this, editWarehouse.class);
+        startActivity(i);
+    }
 }
