@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class itemDetails extends AppCompatActivity {
@@ -32,7 +33,21 @@ public class itemDetails extends AppCompatActivity {
         text.setClickable(false);
         text = findViewById(R.id.TVQuantity);
         text.append(getIntent().getStringExtra("quantity"));
+        int quant = Integer.parseInt(getIntent().getStringExtra("quantity"));
         text.setClickable(false);
+        text = findViewById(R.id.TVRestock);
+        if(quant == 0) {
+            text.append("Restock! You have nothing left!");
+            text.setClickable(false);
+        }
+        else if(quant < 3){
+            text.append("You should probably buy some more soon.");
+            text.setClickable(false);
+        }
+        else{
+            text.append("You're OK on stocks.");
+            text.setClickable(false);
+        }
     }
 
     public void onButtonClick(View v) {
@@ -54,4 +69,5 @@ public class itemDetails extends AppCompatActivity {
         Intent i = new Intent(itemDetails.this, editWarehouse.class);
         startActivity(i);
     }
+
 }
