@@ -25,7 +25,6 @@ public class editWarehouse extends AppCompatActivity {
 
         TextView text = findViewById(R.id.TFEditName);
         text.append(getIntent().getStringExtra("name"));
-        //text.setClickable(false);
         text = findViewById(R.id.TFEditDescription);
         text.append(getIntent().getStringExtra("description"));
         text = findViewById(R.id.TFEditLoc);
@@ -34,6 +33,21 @@ public class editWarehouse extends AppCompatActivity {
         text.append(getIntent().getStringExtra("expire"));
         text = findViewById(R.id.TFEditQuantity);
         text.append(getIntent().getStringExtra("quantity"));
+        int quant = Integer.parseInt(getIntent().getStringExtra("quantity"));
+        text.setClickable(false);
+        text = findViewById(R.id.TVRestock);
+        if(quant == 0) {
+            text.append("Restock! You have nothing left!");
+            text.setClickable(false);
+        }
+        else if(quant < 3){
+            text.append("You should probably buy some more soon.");
+            text.setClickable(false);
+        }
+        else{
+            text.append("You're OK on stocks.");
+            text.setClickable(false);
+        }
 
         text = findViewById(R.id.TFEditName);
         origName = text.getText().toString();
